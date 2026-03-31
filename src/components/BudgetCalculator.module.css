@@ -56,7 +56,7 @@
 
 .stepIndicator.active {
   opacity: 1;
-  color: #10b981;
+  color: var(--brand-blue);
 }
 
 .stepIndicator.completed {
@@ -77,10 +77,10 @@
 }
 
 .active .iconCircle {
-  background: #10b981;
+  background: var(--brand-blue);
   color: white;
-  border-color: #10b981;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  border-color: var(--brand-blue);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .completed .iconCircle {
@@ -139,8 +139,8 @@
 .inputGroup input:focus,
 .inputGroup select:focus {
   outline: none;
-  border-color: #10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .selectionGrid {
@@ -168,15 +168,19 @@
 }
 
 .selectionCard:hover {
-  border-color: #10b981;
-  background: rgba(16, 185, 129, 0.02);
+  border-color: var(--brand-blue);
+  background: rgba(37, 99, 235, 0.02);
   transform: translateY(-2px);
 }
 
 .selectionCardActive {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: #10b981;
-  box-shadow: 0 0 0 1px #10b981;
+  background: rgba(16, 185, 129, 0.05);
+  border: 2px solid #10b981;
+  border-radius: 1.25rem;
+  padding: calc(1.25rem - 1px);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
 }
 
 .selectionCard h4 {

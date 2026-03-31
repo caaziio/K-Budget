@@ -201,6 +201,19 @@ export const TRAVEL_LEISURE_DATA = {
   }
 };
 
+export const VISA_DATA = {
+  nomad: { add: 0, label: 'Digital Nomad / F-Visa' },
+  professional: { add: 20000, label: 'Professional / E-Visa' },
+  working_holiday: { add: 50000, label: 'Working Holiday' },
+  tourist: { add: 100000, label: 'Tourist / Short-stay' }
+};
+
+export const LIFESTYLE_PLAN_DATA = {
+  survival: { mult: 0.8, label: 'Survival Mode', desc: 'Budget focus.' },
+  moderate: { mult: 1.0, label: 'Moderate', desc: 'Balanced.' },
+  comfortable: { mult: 1.4, label: 'Comfortable', desc: 'Higher spending.' }
+};
+
 export const SETUP_DATA = {
   base_admin: 150000, // Arc, Visa, etc.
   arrival_essentials: 450000, // Bedding, kitchen, etc.

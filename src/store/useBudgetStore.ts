@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { 
   HOUSING_DATA, FOOD_DATA, TRANSPORT_DATA, HEALTH_PERSONAL_DATA, 
   LIFESTYLE_SHOPPING_DATA, SOCIAL_DATA, DEVELOPMENT_FITNESS_DATA, 
-  FOREIGNER_DATA, DIGITAL_DATA, MISC_IRREGULAR_DATA, TRAVEL_LEISURE_DATA, SETUP_DATA 
+  FOREIGNER_DATA, DIGITAL_DATA, MISC_IRREGULAR_DATA, TRAVEL_LEISURE_DATA, VISA_DATA, LIFESTYLE_PLAN_DATA, SETUP_DATA 
 } from '@/lib/constants'
 
 // Types for all granular selections
@@ -32,7 +32,6 @@ export type LearningLevel = keyof typeof DEVELOPMENT_FITNESS_DATA.learning;
 export type FitnessLevel = keyof typeof DEVELOPMENT_FITNESS_DATA.fitness;
 
 export type InternationalLife = keyof typeof FOREIGNER_DATA.international;
-export type AdminLoad = keyof typeof FOREIGNER_DATA.admin;
 export type ImportDependency = keyof typeof FOREIGNER_DATA.dependency;
 
 export type DigitalUsage = keyof typeof DIGITAL_DATA.usage;
@@ -44,10 +43,15 @@ export type GiftingLevel = keyof typeof MISC_IRREGULAR_DATA.gifting;
 
 export type TravelLeisureFreq = keyof typeof TRAVEL_LEISURE_DATA.frequency;
 
+export type VisaType = keyof typeof VISA_DATA;
+export type LifestylePlan = keyof typeof LIFESTYLE_PLAN_DATA;
+
 interface BudgetState {
   // Config
   duration: number
   isJeonse: boolean
+  visaType: VisaType
+  lifestylePlan: LifestylePlan
 
   // Housing
   housingType: HousingType
@@ -84,7 +88,6 @@ interface BudgetState {
 
   // Foreigner
   internationalLife: InternationalLife
-  adminLoad: AdminLoad
   importDependency: ImportDependency
 
   // Digital
@@ -113,6 +116,8 @@ interface BudgetState {
 export const useBudgetStore = create<BudgetState>((set, get) => ({
   duration: 6,
   isJeonse: false,
+  visaType: 'professional',
+  lifestylePlan: 'moderate',
   housingType: 'studio',
   housingLocation: 'central',
   housingStyle: 'standard',
@@ -133,7 +138,6 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
   learningLevel: 'occasional',
   fitnessLevel: 'gym',
   internationalLife: 'occasional',
-  adminLoad: 'moderate',
   importDependency: 'medium',
   digitalUsage: 'standard',
   digitalType: 'mixed',
@@ -183,8 +187,9 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
     // 7. Development & Fitness
     const development_fitness_monthly = DEVELOPMENT_FITNESS_DATA.learning[s.learningLevel].add + DEVELOPMENT_FITNESS_DATA.fitness[s.fitnessLevel].add;
 
-    // 8. Foreigner Costs
-    const foreigner_base = FOREIGNER_DATA.international[s.internationalLife].add + FOREIGNER_DATA.admin[s.adminLoad].add;
+    // 8. Foreigner Costs (+Visa)
+    const visa_extra = VISA_DATA[s.visaType].add;
+    const foreigner_base = FOREIGNER_DATA.international[s.internationalLife].add + visa_extra;
     const import_mult = FOREIGNER_DATA.dependency[s.importDependency].mult;
     const foreigner_monthly = foreigner_base * import_mult;
 
@@ -203,8 +208,11 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
 
     // Final Burn Calculation
     const preBufferBurn = housing_total + food_monthly + transport_monthly + health_personal_monthly + lifestyle_shopping_monthly + social_monthly + development_fitness_monthly + foreigner_monthly + digital_monthly + misc_monthly;
+    
+    // Applying Lifestyle Plan Multiplier + Buffer
+    const planMult = LIFESTYLE_PLAN_DATA[s.lifestylePlan].mult;
     const bufferMult = MISC_IRREGULAR_DATA.buffer[s.bufferLevel].mult;
-    const monthlyBurn = Math.round(preBufferBurn * bufferMult);
+    const monthlyBurn = Math.round(preBufferBurn * planMult * bufferMult);
 
     // Upfront Costs
     const deposit_base = HOUSING_DATA.types[s.housingType].deposit;
@@ -228,7 +236,7 @@ export const useBudgetStore = create<BudgetState>((set, get) => ({
         food: food_monthly,
         transport: transport_monthly,
         wellness: health_personal_monthly + development_fitness_monthly,
-        lifestyle: lifestyle_shopping_monthly + social_monthly + digital_monthly,
+        lifestyle: (lifestyle_shopping_monthly + social_monthly + digital_monthly) * planMult,
         foreigner: foreigner_monthly,
         other: misc_monthly
       }

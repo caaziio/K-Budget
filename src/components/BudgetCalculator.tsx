@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useBudgetStore, HousingType, HousingLocation, HousingStyle, CookingFreq, FoodPreference, GroceryStyle, CoffeeHabit, TransportType, TransportFreq, HealthLevel, PersonalCareLevel, ShoppingBehavior, ClothingStyle, TravelLeisureFreq, SocialFreq, NightlifeLevel, EntertainmentStyle, LearningLevel, FitnessLevel, InternationalLife, AdminLoad, ImportDependency, DigitalUsage, DigitalType, InternalTravel, BufferLevel, GiftingLevel } from '@/store/useBudgetStore'
-import { HOUSING_DATA, FOOD_DATA, TRANSPORT_DATA, HEALTH_PERSONAL_DATA, LIFESTYLE_SHOPPING_DATA, SOCIAL_DATA, DEVELOPMENT_FITNESS_DATA, FOREIGNER_DATA, DIGITAL_DATA, MISC_IRREGULAR_DATA, TRAVEL_LEISURE_DATA } from '@/lib/constants'
+import { useBudgetStore, HousingType, HousingLocation, HousingStyle, CookingFreq, FoodPreference, GroceryStyle, CoffeeHabit, TransportType, TransportFreq, HealthLevel, PersonalCareLevel, ShoppingBehavior, ClothingStyle, TravelLeisureFreq, SocialFreq, NightlifeLevel, EntertainmentStyle, LearningLevel, FitnessLevel, InternationalLife, ImportDependency, DigitalUsage, DigitalType, InternalTravel, BufferLevel, GiftingLevel, VisaType, LifestylePlan } from '@/store/useBudgetStore'
+import { HOUSING_DATA, FOOD_DATA, TRANSPORT_DATA, HEALTH_PERSONAL_DATA, LIFESTYLE_SHOPPING_DATA, SOCIAL_DATA, DEVELOPMENT_FITNESS_DATA, FOREIGNER_DATA, DIGITAL_DATA, MISC_IRREGULAR_DATA, TRAVEL_LEISURE_DATA, VISA_DATA, LIFESTYLE_PLAN_DATA } from '@/lib/constants'
 import styles from './BudgetCalculator.module.css'
-import { Plane, Home, Utensils, Wallet, CheckCircle, ChevronLeft, ChevronRight, Info, Coffee, Car, Heart, ShoppingBag, Globe, Zap, AlertCircle, TrendingUp, Dumbbell, BookOpen, Music, Beer, Map } from 'lucide-react'
+import { Plane, Home, Utensils, Wallet, CheckCircle, ChevronLeft, ChevronRight, Info, Coffee, Car, Heart, ShoppingBag, Globe, Zap, AlertCircle, TrendingUp, Dumbbell, BookOpen, Music, Beer, Map, User } from 'lucide-react'
 
 const STEPS = [
   { id: 1, title: 'Identity', icon: Plane },
@@ -43,12 +43,23 @@ export default function BudgetCalculator() {
                    ))}
                 </select>
               </div>
-               <div className={styles.inputGroupFull}>
-                 <label>Admin & Visa Complexity</label>
+               <div className={styles.inputGroupFull} style={{ marginTop: '1rem' }}>
+                 <label><User size={14} /> Visa Status</label>
                  <div className={styles.selectionGrid}>
-                    {(Object.keys(FOREIGNER_DATA.admin) as AdminLoad[]).map(a => (
-                      <div key={a} className={store.adminLoad === a ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('adminLoad', a)}>
-                        <h4>{FOREIGNER_DATA.admin[a].label}</h4>
+                    {(Object.keys(VISA_DATA) as VisaType[]).map(v => (
+                      <div key={v} className={store.visaType === v ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('visaType', v)}>
+                        <span>{VISA_DATA[v].label}</span>
+                      </div>
+                    ))}
+                 </div>
+               </div>
+               <div className={styles.inputGroupFull} style={{ marginTop: '1rem' }}>
+                 <label><Zap size={14} /> Lifestyle Planning Mode</label>
+                 <div className={styles.selectionGrid}>
+                    {(Object.keys(LIFESTYLE_PLAN_DATA) as LifestylePlan[]).map(lp => (
+                      <div key={lp} className={store.lifestylePlan === lp ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('lifestylePlan', lp)}>
+                        <h4>{LIFESTYLE_PLAN_DATA[lp].label}</h4>
+                        <p>{LIFESTYLE_PLAN_DATA[lp].desc}</p>
                       </div>
                     ))}
                  </div>
@@ -325,7 +336,7 @@ export default function BudgetCalculator() {
       <div className={styles.contentArea}><AnimatePresence mode="wait">{renderStep()}</AnimatePresence></div>
       <div className={styles.controls}>
         <button onClick={handleBack} disabled={currentStep === 1} className={styles.backBtn}><ChevronLeft size={20} /> Back</button>
-        <button onClick={handleNext} className={styles.nextBtn}>{currentStep === STEPS.length ? 'Get Full Analysis' : 'Identify Behavior'} <ChevronRight size={20} /></button>
+        <button onClick={handleNext} className={styles.nextBtn}>{currentStep === STEPS.length ? 'Get Full Analysis' : 'Next'} <ChevronRight size={20} /></button>
       </div>
     </div>
   )
