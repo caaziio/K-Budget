@@ -9,9 +9,10 @@ const STEPS = [
   { id: 1, title: 'Identity', icon: Plane },
   { id: 2, title: 'Housing', icon: Home },
   { id: 3, title: 'Dining', icon: Utensils },
-  { id: 4, title: 'Wellness', icon: Heart },
-  { id: 5, title: 'Lifestyle', icon: ShoppingBag },
-  { id: 6, title: 'Result', icon: Wallet },
+  { id: 4, title: 'Transport', icon: Car },
+  { id: 5, title: 'Wellness', icon: Heart },
+  { id: 6, title: 'Lifestyle', icon: ShoppingBag },
+  { id: 7, title: 'Result', icon: Wallet },
 ]
 
 export default function BudgetCalculator() {
@@ -42,16 +43,6 @@ export default function BudgetCalculator() {
                    ))}
                 </select>
               </div>
-               <div className={styles.inputGroupFull}>
-                 <label>Main Mobility Type</label>
-                 <div className={styles.selectionGrid}>
-                    {(Object.keys(TRANSPORT_DATA.main) as TransportType[]).map(t => (
-                      <div key={t} className={store.transportType === t ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('transportType', t)}>
-                        <h4>{TRANSPORT_DATA.main[t].label}</h4>
-                      </div>
-                    ))}
-                 </div>
-               </div>
                <div className={styles.inputGroupFull}>
                  <label>Admin & Visa Complexity</label>
                  <div className={styles.selectionGrid}>
@@ -141,6 +132,34 @@ export default function BudgetCalculator() {
       case 4:
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.stepContent}>
+            <h2 className={styles.stepTitle}>Mobility & Transport</h2>
+            <div className={styles.formGrid}>
+               <div className={styles.inputGroupFull}>
+                 <label>Primary Transport Mode</label>
+                 <div className={styles.selectionGrid}>
+                    {(Object.keys(TRANSPORT_DATA.main) as TransportType[]).map(t => (
+                      <div key={t} className={store.transportType === t ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('transportType', t)}>
+                        <h4>{TRANSPORT_DATA.main[t].label}</h4>
+                      </div>
+                    ))}
+                 </div>
+               </div>
+               <div className={styles.inputGroupFull}>
+                 <label>Movement Frequency</label>
+                 <div className={styles.selectionGrid}>
+                    {(Object.keys(TRANSPORT_DATA.frequency) as TransportFreq[]).map(f => (
+                      <div key={f} className={store.transportFreq === f ? styles.selectionCardActive : styles.selectionCard} onClick={() => store.setVal('transportFreq', f)}>
+                        <h4>{TRANSPORT_DATA.frequency[f].label}</h4>
+                      </div>
+                    ))}
+                 </div>
+               </div>
+            </div>
+          </motion.div>
+        )
+      case 5:
+        return (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.stepContent}>
             <h2 className={styles.stepTitle}>Wellness & Care</h2>
             <div className={styles.formGrid}>
                <div className={styles.inputGroupFull}>
@@ -176,7 +195,7 @@ export default function BudgetCalculator() {
             </div>
           </motion.div>
         )
-      case 5:
+      case 6:
         return (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={styles.stepContent}>
             <h2 className={styles.stepTitle}>Lifestyle & Social</h2>
@@ -240,7 +259,7 @@ export default function BudgetCalculator() {
             </div>
           </motion.div>
         )
-      case 6:
+      case 7:
         return (
           <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className={styles.summaryContent}>
             <div className={styles.stabilityMeter}>

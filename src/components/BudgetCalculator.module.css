@@ -56,7 +56,7 @@
 
 .stepIndicator.active {
   opacity: 1;
-  color: var(--brand-blue);
+  color: #10b981;
 }
 
 .stepIndicator.completed {
@@ -77,10 +77,10 @@
 }
 
 .active .iconCircle {
-  background: var(--brand-blue);
+  background: #10b981;
   color: white;
-  border-color: var(--brand-blue);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  border-color: #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .completed .iconCircle {
@@ -136,10 +136,11 @@
   transition: all 0.2s ease;
 }
 
-.inputGroup input:focus {
+.inputGroup input:focus,
+.inputGroup select:focus {
   outline: none;
-  border-color: var(--brand-blue);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
 .selectionGrid {
@@ -167,15 +168,15 @@
 }
 
 .selectionCard:hover {
-  border-color: var(--brand-blue);
-  background: rgba(37, 99, 235, 0.02);
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.02);
   transform: translateY(-2px);
 }
 
 .selectionCardActive {
-  background: rgba(37, 99, 235, 0.05);
-  border-color: var(--brand-blue);
-  box-shadow: 0 0 0 1px var(--brand-blue);
+  background: rgba(16, 185, 129, 0.08);
+  border-color: #10b981;
+  box-shadow: 0 0 0 1px #10b981;
 }
 
 .selectionCard h4 {
