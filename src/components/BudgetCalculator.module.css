@@ -1,0 +1,452 @@
+:root {
+  --primary: #0f172a;
+  --brand-blue: #2563eb;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --background: #ffffff;
+  --foreground: #020617;
+}
+
+.calculatorWrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+}
+
+.stepperNav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.stepperNav::after {
+  content: '';
+  position: absolute;
+  top: 1.125rem;
+  left: 3rem;
+  right: 3rem;
+  height: 2px;
+  background: var(--muted);
+  z-index: 0;
+}
+
+.stepIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  color: var(--muted-foreground);
+}
+
+.stepIndicator span {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.stepIndicator.active {
+  opacity: 1;
+  color: var(--brand-blue);
+}
+
+.stepIndicator.completed {
+  opacity: 1;
+  color: #10b981;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--muted);
+  transition: all 0.3s ease;
+}
+
+.active .iconCircle {
+  background: var(--brand-blue);
+  color: white;
+  border-color: var(--brand-blue);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.completed .iconCircle {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.contentArea {
+  min-height: 450px;
+  margin-bottom: 2rem;
+}
+
+.stepTitle {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.inputGroupFull {
+  grid-column: span 2;
+}
+
+.inputGroup label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputGroup input,
+.inputGroup select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.selectionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.selectionGridVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.selectionCard {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.selectionCard:hover {
+  border-color: var(--brand-blue);
+  background: rgba(37, 99, 235, 0.02);
+  transform: translateY(-2px);
+}
+
+.selectionCardActive {
+  background: rgba(37, 99, 235, 0.05);
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 1px var(--brand-blue);
+}
+
+.selectionCard h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.selectionCard p {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cardPrice {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+}
+
+.cardFooter {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  display: flex;
+  justify-content: space-between;
+}
+
+.stabilityMeter {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.meterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.meterHeader h3 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.meterHeader span {
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.meterTrack {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.meterFill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.meterDesc {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.summaryCard, .summaryCardPrimary {
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: white;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.summaryCard h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.summaryCardPrimary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.summaryCardPrimary h3 {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.behavioralCluster {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.behavioralCluster section {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.behavioralCluster h3 {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.toggleRow label {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0;
+}
+
+.selectionCard span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: block;
+  text-align: center;
+}
+
+.summaryContent {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.nextBtn {
+  background: var(--primary);
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nextBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.amountIndicator {
+  font-size: 2rem;
+  font-weight: 800;
+  display: block;
+}
+
+.breakdownBox {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.barChart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.barItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.barLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: capitalize;
+}
+
+.barLine {
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.barLine div {
+  height: 100%;
+  background: var(--brand-blue);
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .formGrid, .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+  .inputGroupFull {
+    grid-column: span 1;
+  }
+}
