@@ -5,10 +5,10 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'K-Budget | Korea Financial Entry Planner',
-  description: 'Plan your budget for moving to Korea. K-Budget helps you calculate upfront costs, monthly expenses, and build a sustainable financial runway.',
+  title: 'KCalc | Korea Financial Entry Planner',
+  description: 'Plan your budget for moving to Korea. KCalc helps you calculate upfront costs, monthly expenses, and build a sustainable financial runway.',
   keywords: ['Korea budget', 'study in Korea', 'Korea move planner', 'cost of living Korea', 'Korean student budget'],
-  authors: [{ name: 'K-Budget' }],
+  authors: [{ name: 'KCalc' }],
   robots: 'index, follow',
 }
 
@@ -27,13 +27,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="layout-wrapper">
           <nav className="header-nav">
-             <div className="logo">K-Budget</div>
+             <div className="logo">KCalc</div>
           </nav>
           <main className="main-content">
             {children}
           </main>
           <footer className="footer-nav">
-             &copy; {new Date().getFullYear()} K-Budget - Your Korea Entry Partner
+             &copy; {new Date().getFullYear()} KCalc - Your Korea Entry Partner
           </footer>
         </div>
       </body>

@@ -1,6 +1,6 @@
-# K-Budget Categories and Items
+# KCalc Categories and Items
 
-This document outlines all behavioral categories and logic tiers used in the K-Budget calculation engine.
+This document outlines all behavioral categories and logic tiers used in the KCalc calculation engine.
 
 ## 🏢 1. Housing
 Calculates base rent and utility usage, adjusted by location multipliers.

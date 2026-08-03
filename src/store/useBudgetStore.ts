@@ -1,57 +1,34 @@
 import { create } from 'zustand'
 import { 
-  HOUSING_DATA, FOOD_DATA, TRANSPORT_DATA, HEALTH_PERSONAL_DATA, 
-  LIFESTYLE_SHOPPING_DATA, SOCIAL_DATA, DEVELOPMENT_FITNESS_DATA, 
-  FOREIGNER_DATA, DIGITAL_DATA, MISC_IRREGULAR_DATA, TRAVEL_LEISURE_DATA, VISA_DATA, LIFESTYLE_PLAN_DATA, SETUP_DATA 
+  HOUSING_DATA, FOOD_DATA, TRANSPORT_DATA, DIGITAL_DATA, 
+  LIFESTYLE_DATA, HEALTH_DATA, VISA_DATA, SETUP_DATA 
 } from '@/lib/constants'
 
-// Types for all granular selections
 export type HousingType = keyof typeof HOUSING_DATA.types;
 export type HousingLocation = keyof typeof HOUSING_DATA.locations;
 export type HousingStyle = keyof typeof HOUSING_DATA.usage_styles;
 
 export type CookingFreq = keyof typeof FOOD_DATA.cooking;
-export type FoodPreference = keyof typeof FOOD_DATA.preferences;
-export type GroceryStyle = keyof typeof FOOD_DATA.groceries;
-export type CoffeeHabit = keyof typeof FOOD_DATA.coffee;
+export type RestaurantFreq = keyof typeof FOOD_DATA.restaurant;
+export type DeliveryFreq = keyof typeof FOOD_DATA.delivery;
+export type ConvenienceFreq = keyof typeof FOOD_DATA.convenience;
+export type CafeFreq = keyof typeof FOOD_DATA.cafe_snacks;
 
-export type TransportType = keyof typeof TRANSPORT_DATA.main;
-export type TransportFreq = keyof typeof TRANSPORT_DATA.frequency;
+export type TransportType = keyof typeof TRANSPORT_DATA.types;
 
-export type HealthLevel = keyof typeof HEALTH_PERSONAL_DATA.health;
-export type PersonalCareLevel = keyof typeof HEALTH_PERSONAL_DATA.personal;
-
-export type ShoppingBehavior = keyof typeof LIFESTYLE_SHOPPING_DATA.behavior;
-export type ClothingStyle = keyof typeof LIFESTYLE_SHOPPING_DATA.clothing;
-
-export type SocialFreq = keyof typeof SOCIAL_DATA.frequency;
-export type NightlifeLevel = keyof typeof SOCIAL_DATA.nightlife;
-export type EntertainmentStyle = keyof typeof SOCIAL_DATA.type;
-
-export type LearningLevel = keyof typeof DEVELOPMENT_FITNESS_DATA.learning;
-export type FitnessLevel = keyof typeof DEVELOPMENT_FITNESS_DATA.fitness;
-
-export type InternationalLife = keyof typeof FOREIGNER_DATA.international;
-export type ImportDependency = keyof typeof FOREIGNER_DATA.dependency;
-
-export type DigitalUsage = keyof typeof DIGITAL_DATA.usage;
-export type DigitalType = keyof typeof DIGITAL_DATA.type;
-
-export type InternalTravel = keyof typeof MISC_IRREGULAR_DATA.internal_travel;
-export type BufferLevel = keyof typeof MISC_IRREGULAR_DATA.buffer;
-export type GiftingLevel = keyof typeof MISC_IRREGULAR_DATA.gifting;
-
-export type TravelLeisureFreq = keyof typeof TRAVEL_LEISURE_DATA.frequency;
+export type BehaviorLevel = 'survival' | 'moderate' | 'comfortable' | 'none';
 
 export type VisaType = keyof typeof VISA_DATA;
-export type LifestylePlan = keyof typeof LIFESTYLE_PLAN_DATA;
+export type LifestylePlan = 'survival' | 'moderate' | 'comfortable';
 
 interface BudgetState {
+  language: 'en' | 'fr'
   // Config
   duration: number
-  isJeonse: boolean
   visaType: VisaType
   lifestylePlan: LifestylePlan
+  currency: 'KRW' | 'USD' | 'EUR'
+  proOptimized: boolean
 
   // Housing
   housingType: HousingType
@@ -60,49 +37,41 @@ interface BudgetState {
 
   // Food
   cookingFreq: CookingFreq
-  foodPref: FoodPreference
-  groceryStyle: GroceryStyle
-  coffeeHabit: CoffeeHabit
+  restaurantFreq: RestaurantFreq
+  deliveryFreq: DeliveryFreq
+  convenienceFreq: ConvenienceFreq
+  cafeFreq: CafeFreq
 
   // Transport
   transportType: TransportType
-  transportFreq: TransportFreq
-
-  // Health & Personal
-  healthLevel: HealthLevel
-  personalLevel: PersonalCareLevel
-
-  // Lifestyle
-  shoppingBehavior: ShoppingBehavior
-  clothingStyle: ClothingStyle
-  travelLeisure: TravelLeisureFreq
-
-  // Social
-  socialFreq: SocialFreq
-  nightlifeLevel: NightlifeLevel
-  entertainmentStyle: EntertainmentStyle
-
-  // Development
-  learningLevel: LearningLevel
-  fitnessLevel: FitnessLevel
-
-  // Foreigner
-  internationalLife: InternationalLife
-  importDependency: ImportDependency
 
   // Digital
-  digitalUsage: DigitalUsage
-  digitalType: DigitalType
+  digitalSim: boolean
+  digitalSubs: boolean
+  digitalSaas: boolean
+  digitalCreator: boolean
   useCustomDigital: boolean
   customDigitalAmount: number
+  amountSim: number
+  amountSubs: number
+  amountSaas: number
+  amountCreator: number
 
-  // Misc
-  internalTravel: InternalTravel
-  bufferLevel: BufferLevel
-  giftingLevel: GiftingLevel
+  // Lifestyle
+  socialLevel: BehaviorLevel
+  shoppingLevel: BehaviorLevel
+  clothingLevel: BehaviorLevel
+  entertainmentLevel: BehaviorLevel
 
-  // Action
+  // Health
+  healthBasic: BehaviorLevel
+  healthGym: BehaviorLevel
+  healthClinic: BehaviorLevel
+  healthPersonal: BehaviorLevel
+
+  // Actions
   setVal: (key: keyof BudgetState, val: any) => void
+  applyPreset: (plan: LifestylePlan) => void
   
   calculateTotals: () => {
     monthlyBurn: number
@@ -110,136 +79,318 @@ interface BudgetState {
     totalBudgetRequired: number
     stabilityScore: number
     breakdown: Record<string, number>
+    potentialSavings: number
   }
 }
 
 export const useBudgetStore = create<BudgetState>((set, get) => ({
+  language: 'en',
   duration: 6,
-  isJeonse: false,
   visaType: 'professional',
   lifestylePlan: 'moderate',
+  currency: 'KRW',
+  proOptimized: false,
+
+  // Housing
   housingType: 'studio',
   housingLocation: 'central',
   housingStyle: 'standard',
-  cookingFreq: 'balanced',
-  foodPref: 'mixed',
-  groceryStyle: 'standard',
-  coffeeHabit: 'frequent',
-  transportType: 'public',
-  transportFreq: 'weekly',
-  healthLevel: 'occasional',
-  personalLevel: 'standard',
-  shoppingBehavior: 'occasional',
-  clothingStyle: 'seasonal',
-  travelLeisure: 'monthly',
-  socialFreq: 'weekly',
-  nightlifeLevel: 'occasional',
-  entertainmentStyle: 'mixed',
-  learningLevel: 'occasional',
-  fitnessLevel: 'gym',
-  internationalLife: 'occasional',
-  importDependency: 'medium',
-  digitalUsage: 'standard',
-  digitalType: 'mixed',
+
+  // Food
+  cookingFreq: 'moderate',
+  restaurantFreq: 'moderate',
+  deliveryFreq: 'moderate',
+  convenienceFreq: 'moderate',
+  cafeFreq: 'moderate',
+
+  // Transport
+  transportType: 'metro',
+
+  // Digital
+  digitalSim: true,
+  digitalSubs: true,
+  digitalSaas: false,
+  digitalCreator: false,
   useCustomDigital: false,
   customDigitalAmount: 0,
-  internalTravel: 'occasional',
-  bufferLevel: 'medium',
-  giftingLevel: 'occasional',
+  amountSim: 50000,
+  amountSubs: 70000,
+  amountSaas: 0,
+  amountCreator: 0,
 
-  setVal: (key, val) => set((s) => ({ ...s, [key]: val })),
+  // Lifestyle
+  socialLevel: 'moderate',
+  shoppingLevel: 'moderate',
+  clothingLevel: 'moderate',
+  entertainmentLevel: 'moderate',
+
+  // Health
+  healthBasic: 'moderate',
+  healthGym: 'moderate',
+  healthClinic: 'moderate',
+  healthPersonal: 'moderate',
+
+  setVal: (key, val) => {
+    set((s) => {
+      const updated = { ...s, [key]: val } as any;
+
+      // INTERCEPTOR 1: Auto-initialize custom amounts when checkboxes are enabled
+      if (key === 'digitalSim' && val === true && s.amountSim === 0) {
+        updated.amountSim = DIGITAL_DATA.types.sim_apps[s.lifestylePlan];
+      }
+      if (key === 'digitalSubs' && val === true && s.amountSubs === 0) {
+        updated.amountSubs = DIGITAL_DATA.types.subscriptions[s.lifestylePlan];
+      }
+      if (key === 'digitalSaas' && val === true && s.amountSaas === 0) {
+        updated.amountSaas = DIGITAL_DATA.types.saas_ai[s.lifestylePlan];
+      }
+      if (key === 'digitalCreator' && val === true && s.amountCreator === 0) {
+        updated.amountCreator = DIGITAL_DATA.types.creator_stack[s.lifestylePlan];
+      }
+
+
+
+      return updated;
+    });
+  },
+
+  applyPreset: (plan: LifestylePlan) => {
+    if (plan === 'survival') {
+      set({
+        lifestylePlan: 'survival',
+        housingType: 'goshiwon',
+        housingStyle: 'minimal',
+        cookingFreq: 'survival', // Shared kitchen cooking enabled
+        restaurantFreq: 'survival', // Eat cheap street food/CVS
+        deliveryFreq: 'survival', // 0 delivery
+        convenienceFreq: 'survival',
+        cafeFreq: 'survival', // 0 cafe
+        transportType: 'metro',
+        digitalSim: true,
+        digitalSubs: false,
+        digitalSaas: false,
+        digitalCreator: false,
+        useCustomDigital: false,
+        customDigitalAmount: 0,
+        amountSim: 30000,
+        amountSubs: 0,
+        amountSaas: 0,
+        amountCreator: 0,
+        socialLevel: 'survival',
+        shoppingLevel: 'survival',
+        clothingLevel: 'survival',
+        entertainmentLevel: 'survival',
+        healthBasic: 'survival',
+        healthGym: 'survival',
+        healthClinic: 'survival',
+        healthPersonal: 'survival'
+      });
+    } else if (plan === 'moderate') {
+      set({
+        lifestylePlan: 'moderate',
+        housingType: 'studio',
+        housingStyle: 'standard',
+        cookingFreq: 'moderate',
+        restaurantFreq: 'moderate',
+        deliveryFreq: 'moderate',
+        convenienceFreq: 'moderate',
+        cafeFreq: 'moderate',
+        transportType: 'mixed',
+        digitalSim: true,
+        digitalSubs: true,
+        digitalSaas: false,
+        digitalCreator: false,
+        useCustomDigital: false,
+        customDigitalAmount: 0,
+        amountSim: 50000,
+        amountSubs: 70000,
+        amountSaas: 0,
+        amountCreator: 0,
+        socialLevel: 'moderate',
+        shoppingLevel: 'moderate',
+        clothingLevel: 'moderate',
+        entertainmentLevel: 'moderate',
+        healthBasic: 'moderate',
+        healthGym: 'moderate',
+        healthClinic: 'moderate',
+        healthPersonal: 'moderate'
+      });
+    } else if (plan === 'comfortable') {
+      set({
+        lifestylePlan: 'comfortable',
+        housingType: 'officetel',
+        housingStyle: 'premium',
+        cookingFreq: 'comfortable',
+        restaurantFreq: 'comfortable',
+        deliveryFreq: 'comfortable',
+        convenienceFreq: 'comfortable',
+        cafeFreq: 'comfortable',
+        transportType: 'taxi',
+        digitalSim: true,
+        digitalSubs: true,
+        digitalSaas: true,
+        digitalCreator: false,
+        useCustomDigital: false,
+        customDigitalAmount: 0,
+        amountSim: 80000,
+        amountSubs: 150000,
+        amountSaas: 300000,
+        amountCreator: 0,
+        socialLevel: 'comfortable',
+        shoppingLevel: 'comfortable',
+        clothingLevel: 'comfortable',
+        entertainmentLevel: 'comfortable',
+        healthBasic: 'comfortable',
+        healthGym: 'comfortable',
+        healthClinic: 'comfortable',
+        healthPersonal: 'comfortable'
+      });
+    }
+  },
 
   calculateTotals: () => {
     const s = get();
 
-    // 1. Housing Calculation
-    const locMult = HOUSING_DATA.locations[s.housingLocation].mult;
-    const baseRent = HOUSING_DATA.types[s.housingType].base * locMult;
-    const rent = s.isJeonse ? 0 : baseRent;
-    const utilities = HOUSING_DATA.usage_styles[s.housingStyle].util_add * locMult;
-    const housing_total = rent + utilities;
+    const runCalculation = (proMode: boolean) => {
+      const mode = s.lifestylePlan;
 
-    // 2. Food Calculation
-    const food_base = FOOD_DATA.cooking[s.cookingFreq].base_mod;
-    const food_pref_mult = FOOD_DATA.preferences[s.foodPref].mult;
-    const grocery_mult = FOOD_DATA.groceries[s.groceryStyle].mult;
-    const food_monthly = (food_base * food_pref_mult * grocery_mult) + FOOD_DATA.coffee[s.coffeeHabit].add;
+      // 1. Housing Calculation
+      const housingConfig = HOUSING_DATA.types[s.housingType];
+      const baseRent = housingConfig[mode] !== undefined ? housingConfig[mode] : housingConfig.moderate;
+      let rent = baseRent;
+      
+      const locMult = HOUSING_DATA.locations[s.housingLocation].mult;
+      let utilities = HOUSING_DATA.usage_styles[s.housingStyle].util_add * locMult;
 
-    // 3. Transport
-    const trans_base = TRANSPORT_DATA.main[s.transportType].base;
-    const trans_freq_mult = TRANSPORT_DATA.frequency[s.transportFreq].mult;
-    const transport_monthly = trans_base * trans_freq_mult;
+      if (proMode) {
+        rent = rent * 0.90; // Save 10% on monthly rent with local expert channels
+        utilities = utilities * 0.85; // Save 15% on utilities via smart energy habits
+      }
+      const housing_total = (rent * locMult) + utilities;
 
-    // 4. Health & Personal
-    const health_personal_monthly = HEALTH_PERSONAL_DATA.health[s.healthLevel].add + HEALTH_PERSONAL_DATA.personal[s.personalLevel].add;
+      // 2. Food Calculation (Behavior Engine + Regional Modifier)
+      const isPremiumLoc = s.housingLocation === 'premium';
+      const locFoodMult = isPremiumLoc ? 1.15 : 1.0;
 
-    // 5. Lifestyle & Shopping (+Travel)
-    const lifestyle_shopping_monthly = 
-      LIFESTYLE_SHOPPING_DATA.behavior[s.shoppingBehavior].add + 
-      LIFESTYLE_SHOPPING_DATA.clothing[s.clothingStyle].add +
-      TRAVEL_LEISURE_DATA.frequency[s.travelLeisure].add;
+      const homeCost = FOOD_DATA.cooking[s.cookingFreq]?.add || 0;
+      const restCost = (FOOD_DATA.restaurant[s.restaurantFreq]?.add || 0) * locFoodMult;
+      const delCost = FOOD_DATA.delivery[s.deliveryFreq]?.add || 0;
+      const cvsCost = FOOD_DATA.convenience[s.convenienceFreq]?.add || 0;
+      const cafeCost = (FOOD_DATA.cafe_snacks[s.cafeFreq]?.add || 0) * locFoodMult;
+      const baseFood = homeCost + restCost + delCost + cvsCost + cafeCost;
 
-    // 6. Social & Entertainment
-    const social_base = SOCIAL_DATA.frequency[s.socialFreq].add + SOCIAL_DATA.nightlife[s.nightlifeLevel].add;
-    const social_style_mult = SOCIAL_DATA.type[s.entertainmentStyle].mult;
-    const social_monthly = social_base * social_style_mult;
+      let food_monthly = baseFood; // Decoupled from housing type modifiers
 
-    // 7. Development & Fitness
-    const development_fitness_monthly = DEVELOPMENT_FITNESS_DATA.learning[s.learningLevel].add + DEVELOPMENT_FITNESS_DATA.fitness[s.fitnessLevel].add;
+      if (proMode) {
+        food_monthly = food_monthly * 0.85; // Save 15% on groceries & dining via local discount marts/apps
+      }
 
-    // 8. Foreigner Costs (+Visa)
-    const visa_extra = VISA_DATA[s.visaType].add;
-    const foreigner_base = FOREIGNER_DATA.international[s.internationalLife].add + visa_extra;
-    const import_mult = FOREIGNER_DATA.dependency[s.importDependency].mult;
-    const foreigner_monthly = foreigner_base * import_mult;
+      // 3. Transport
+      const transConfig = TRANSPORT_DATA.types[s.transportType];
+      let transport_monthly = transConfig[mode] !== undefined ? transConfig[mode] : transConfig.moderate;
 
-    // 9. Digital Subscriptions (Categorical vs Custom)
-    let digital_monthly = 0;
-    if (s.useCustomDigital) {
-      digital_monthly = s.customDigitalAmount;
-    } else {
-      const digital_base = DIGITAL_DATA.usage[s.digitalUsage].add;
-      const digital_type_mult = DIGITAL_DATA.type[s.digitalType].mult;
-      digital_monthly = digital_base * digital_type_mult;
-    }
+      if (proMode) {
+        transport_monthly = transport_monthly * 0.85; // Save 15% with optimized local transit pass (K-Pass)
+      }
 
-    // 10. Misc & Irregular
-    const misc_monthly = MISC_IRREGULAR_DATA.internal_travel[s.internalTravel].add + MISC_IRREGULAR_DATA.gifting[s.giftingLevel].add;
+      // 4. Health & Personal
+      const basicCost = s.healthBasic !== 'none' ? HEALTH_DATA.basic[s.healthBasic] : 0;
+      const gymCost = s.healthGym !== 'none' ? HEALTH_DATA.gym[s.healthGym] : 0;
+      const clinicCost = s.healthClinic !== 'none' ? HEALTH_DATA.healthcare[s.healthClinic] : 0;
+      const personalCost = s.healthPersonal !== 'none' ? HEALTH_DATA.personal[s.healthPersonal] : 0;
+      let health_personal_monthly = basicCost + gymCost + clinicCost + personalCost;
 
-    // Final Burn Calculation
-    const preBufferBurn = housing_total + food_monthly + transport_monthly + health_personal_monthly + lifestyle_shopping_monthly + social_monthly + development_fitness_monthly + foreigner_monthly + digital_monthly + misc_monthly;
-    
-    // Applying Lifestyle Plan Multiplier + Buffer
-    const planMult = LIFESTYLE_PLAN_DATA[s.lifestylePlan].mult;
-    const bufferMult = MISC_IRREGULAR_DATA.buffer[s.bufferLevel].mult;
-    const monthlyBurn = Math.round(preBufferBurn * planMult * bufferMult);
+      if (proMode) {
+        health_personal_monthly = health_personal_monthly * 0.90; // Save 10% on grooming/fitness deals
+      }
 
-    // Upfront Costs
-    const deposit_base = HOUSING_DATA.types[s.housingType].deposit;
-    const deposit = s.isJeonse ? deposit_base * 5 : deposit_base; // Rough Jeonse estimate if not specified
-    const upfront = SETUP_DATA.base_admin + SETUP_DATA.arrival_essentials + SETUP_DATA.emergency_cash + deposit + monthlyBurn;
+      // 5. Lifestyle & Social (Premium Neighborhood Multiplier)
+      const locLifestyleMult = isPremiumLoc ? 1.15 : 1.0;
+      const socCost = (s.socialLevel !== 'none' ? LIFESTYLE_DATA.social[s.socialLevel] : 0) * locLifestyleMult;
+      const shopCost = s.shoppingLevel !== 'none' ? LIFESTYLE_DATA.shopping[s.shoppingLevel] : 0;
+      const clothCost = s.clothingLevel !== 'none' ? LIFESTYLE_DATA.clothing[s.clothingLevel] : 0;
+      const entCost = s.entertainmentLevel !== 'none' ? LIFESTYLE_DATA.entertainment[s.entertainmentLevel] : 0;
+      let lifestyle_shopping_monthly = socCost + shopCost + clothCost + entCost;
 
-    const totalBudgetRequired = upfront + (monthlyBurn * (s.duration - 1));
+      if (proMode) {
+        lifestyle_shopping_monthly = lifestyle_shopping_monthly * 0.90; // Save 10% on entertainment & clothing
+      }
 
-    // Stability Score logic: Compare Fixed (Survival) Costs vs Flexible (Luxury) Costs
-    const survival_floor = (HOUSING_DATA.types.goshiwon.base * 0.7) + 300000 + TRANSPORT_DATA.main.public.base;
-    const flexible_spending = monthlyBurn - survival_floor;
-    const stabilityScore = Math.min(100, Math.max(0, 100 - (flexible_spending / survival_floor) * 40));
+      // 6. Digital Subscriptions (SIM + Checked categories OR Custom manual amount)
+      let digital_monthly = 0;
+      if (s.useCustomDigital) {
+        digital_monthly = s.customDigitalAmount;
+      } else {
+        const simCost = s.digitalSim ? s.amountSim : 0;
+        const subsCost = s.digitalSubs ? s.amountSubs : 0;
+        const saasCost = s.digitalSaas ? s.amountSaas : 0;
+        const creatorCost = s.digitalCreator ? s.amountCreator : 0;
+        digital_monthly = simCost + subsCost + saasCost + creatorCost;
+      }
+
+      if (proMode) {
+        digital_monthly = Math.max(0, digital_monthly - 15000); // Save 15,000 KRW/mo using local budget MVNO SIM
+      }
+
+      // Final Burn Calculation
+      const monthlyBurn = Math.round(
+        housing_total + 
+        food_monthly + 
+        transport_monthly + 
+        health_personal_monthly + 
+        lifestyle_shopping_monthly + 
+        digital_monthly
+      );
+
+      // Upfront Costs
+      const deposit = housingConfig.deposit * locMult;
+      const visa_extra = VISA_DATA[s.visaType].add;
+      const installationCost = SETUP_DATA.installation_matrix[mode]?.amount || 600000;
+      
+      // Immediate Setup Cash includes: 1st Month Living Spending + Deposit + Setup Essentials + Visa Fees + Emergency Buffer
+      let upfront = monthlyBurn + SETUP_DATA.base_admin + installationCost + SETUP_DATA.emergency_cash + deposit + visa_extra;
+      
+      // Car owner fee addition
+      if (s.transportType === 'car') {
+        upfront += 1500000; // Add ₩1,500,000 setup fee in Month 1 for registration/inspection
+      }
+
+      if (proMode) {
+        // Pro savings: 15% discount on installation cost via Karrot Market (당근마켓) second-hand bundle deals
+        upfront = upfront - (installationCost * 0.15);
+      }
+
+      const totalBudgetRequired = upfront + (monthlyBurn * (s.duration - 1));
+
+      // Stability Score logic
+      const survival_floor = 450000 + 160000 + 80000 + 100000; // housing rent + food floor + transit + health basic
+      const flexible_spending = Math.max(0, monthlyBurn - survival_floor);
+      const stabilityScore = Math.min(100, Math.max(0, 100 - (flexible_spending / survival_floor) * 35));
+
+      return {
+        monthlyBurn,
+        totalUpfront: upfront,
+        totalBudgetRequired,
+        stabilityScore,
+        breakdown: {
+          housing: housing_total,
+          food: food_monthly,
+          transport: transport_monthly,
+          wellness: health_personal_monthly,
+          lifestyle: lifestyle_shopping_monthly + digital_monthly
+        }
+      };
+    };
+
+    const normal = runCalculation(false);
+    const optimized = runCalculation(true);
+
+    const active = s.proOptimized ? optimized : normal;
+    const potentialSavings = normal.totalBudgetRequired - optimized.totalBudgetRequired;
 
     return {
-      monthlyBurn,
-      totalUpfront: upfront,
-      totalBudgetRequired,
-      stabilityScore,
-      breakdown: {
-        housing: housing_total,
-        food: food_monthly,
-        transport: transport_monthly,
-        wellness: health_personal_monthly + development_fitness_monthly,
-        lifestyle: (lifestyle_shopping_monthly + social_monthly + digital_monthly) * planMult,
-        foreigner: foreigner_monthly,
-        other: misc_monthly
-      }
+      ...active,
+      potentialSavings
     };
   }
 }))
