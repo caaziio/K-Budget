@@ -130,7 +130,6 @@ const getTranslation = (text: string, lang: 'en' | 'fr'): string => {
     "Officetels usually require a minimum 1-year contract. For stays under 3 months, consider specialized short-term rental platforms or co-living spaces instead.": "Les Officetels requièrent généralement un contrat d'un an minimum. Pour des séjours de moins de 3 mois, envisagez des plateformes de location meublée de courte durée ou des espaces de co-living.",
 
     // Utility usage levels
-    "Utility & Climate Usage Style": "Style de consommation d'énergie",
     "Survival Utility Add-on": "Niveau Survie",
     "Strict economy utilities, minimal AC & floor heating.": "Factures très limitées, climatisation et chauffage au sol minimaux.",
     "Moderate Utility Add-on": "Niveau Équilibré",
