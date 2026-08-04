@@ -338,9 +338,10 @@ export default function BudgetCalculator() {
       case 3:
         return `${store.language === 'fr' ? 'Cuisine' : 'Cook'}: ${t[store.cookingFreq]?.split(' ')[0] || store.cookingFreq} • ${store.language === 'fr' ? 'Resto' : 'Rest'}: ${t[store.restaurantFreq]?.split(' ')[0] || store.restaurantFreq}`;
       case 4:
-        return store.transportType === 'public' ? (store.language === 'fr' ? 'Transit' : 'Transit') :
+        return store.transportType === 'metro' ? (store.language === 'fr' ? 'Transit' : 'Transit') :
+               store.transportType === 'mixed' ? (store.language === 'fr' ? 'Mixte' : 'Mixed') :
                store.transportType === 'taxi' ? 'Taxi' :
-               (store.language === 'fr' ? 'Marche' : 'Walk');
+               (store.language === 'fr' ? 'Voiture' : 'Car');
       case 5:
         return `Gym: ${t[store.healthGym]?.split(' ')[0] || store.healthGym} • ${store.language === 'fr' ? 'Clinique' : 'Clinic'}: ${t[store.healthClinic]?.split(' ')[0] || store.healthClinic}`;
       case 6:
