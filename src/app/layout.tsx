@@ -26,15 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="layout-wrapper">
-          <nav className="header-nav">
-             <div className="logo">KCalc</div>
-          </nav>
           <main className="main-content">
             {children}
           </main>
-          <footer className="footer-nav">
-             &copy; {new Date().getFullYear()} KCalc - Your Korea Entry Partner
-          </footer>
         </div>
       </body>
     </html>

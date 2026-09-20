@@ -3,6 +3,12 @@ export const translations = {
     // App header & layout
     logo: "KCalc",
     partner: "Your Korea Entry Partner",
+    navCalculator: "Calculator",
+    navDistricts: "Seoul Districts",
+    navVisas: "Visas & Rules",
+    navRelocation: "Relocation Pack",
+    navData: "Market Data",
+    bookConsultationBtn: "Book Consultation",
     // Homepage
     journeyTitle: "Your Journey to Korea Starts with a Plan",
     heroDescription: "KCalc is the essential behavior-based financial planner for expats, students, and digital nomads moving to South Korea. Calculate costs, manage your runway, and optimize your stay.",
@@ -16,7 +22,7 @@ export const translations = {
     // Steps
     stepPresets: "Preset & Duration",
     stepHousing: "Housing",
-    stepFood: "Food & Cafe",
+    stepFood: "Food & Drinks",
     stepTransport: "Transport",
     stepHealth: "Health & Care",
     stepLifestyle: "Lifestyle & Social",
@@ -35,11 +41,11 @@ export const translations = {
     housingUsageLabel: "Utility Consumption Level",
 
     // Step 3: Food
-    cookingLabel: "Home Cooking Frequency",
+    cookingLabel: "Home Cooking & Groceries",
     eatingOutLabel: "Restaurant Meals (Dining Out)",
     deliveryLabel: "Food Delivery (Baemin/Coupang)",
     convenienceLabel: "Convenience Store Meals",
-    cafeLabel: "Cafes & Snack Habits",
+    cafeLabel: "Cafes, Tea, Bubble Tea & Drinks",
 
     // Step 4: Transport
     transportLabel: "Primary Transit Method",
@@ -49,7 +55,7 @@ export const translations = {
     clinicLabel: "Medical Care / Clinics",
 
     // Step 6: Lifestyle & Social
-    socialLabel: "Socializing & Nightlife Frequency",
+    socialLabel: "Socializing & Gatherings",
     shoppingLabel: "Shopping (Fashion, Goods)",
 
     // Step 7: Summary
@@ -78,65 +84,96 @@ export const translations = {
     nextBtn: "Next",
     diagnosticBtn: "📊 View Cost Diagnostic Report",
 
-    // Labels & Options (Translations for dynamic values from constants)
+    // Labels & Options
     goshiwon: "Goshiwon (고시원)",
-    goshiwonDesc: "Micro-room, shared shower/laundry, no private kitchen.",
-    shared: "Shared Apartment",
-    sharedDesc: "Private bedroom in a shared flat, kitchen access.",
+    goshiwonDesc: "Very small compact private room (3-6m²), shared bathroom & laundry. Zero lease commitment, minimal deposit.",
+    shared: "Shared Apartment (Sharehouse)",
+    sharedDesc: "Private furnished bedroom in a shared flat with common kitchen, living area, and bathroom.",
     studio: "One-room Studio (원룸)",
-    studioDesc: "Standard private studio flat with kitchen.",
+    studioDesc: "Independent private studio with private kitchen and bathroom. Korea's standard expat housing.",
     officetel: "Officetel (오피스텔)",
-    officetelDesc: "Premium high-ceiling studio, modern kitchen facilities.",
+    officetelDesc: "Modern commercial high-rise studio with elevator, 24/7 security, and built-in appliances.",
     apartment: "Apartment (아파트)",
-    apartmentDesc: "Luxury multi-room flat with large full-size kitchen.",
+    apartmentDesc: "Spacious multi-room flat with large kitchen & living room. Requires high key-money deposit.",
     guesthouse: "Guest House / Hostel",
-    guesthouseDesc: "Short-stay hostel or guest house room. Fully furnished, flexible daily/monthly rates, zero deposit.",
-    friend: "Free / Friend's Place",
-    friendDesc: "Staying with family/friends or host housing.",
+    guesthouseDesc: "Furnished short-stay room or dorm. Includes all utilities & Wi-Fi, flexible booking, zero deposit.",
+    friend: "Staying with Friend / Family",
+    friendDesc: "Living with friends or family without rent. Choose whether utilities are free or shared.",
 
     outside_seoul: "Outside Seoul (Busan, Incheon, Daegu)",
     outskirts: "Seoul Outskirts (Incheon suburbs, Gyeonggi, outer districts)",
     central: "Seoul Central (Mapo, Yongsan, Gangbuk)",
     premium: "Premium Districts (Gangnam, Seocho, Songpa)",
     
-    survival: "Survival Mode (Minimal / Thrift)",
-    moderate: "Moderate Mode (Balanced / Typical)",
-    comfortable: "Comfortable Mode (Relaxed / Higher End)",
+    survival: "Essential Budget Mode (Thrifty)",
+    moderate: "Standard Mode (Balanced)",
+    comfortable: "Comfortable Mode (Relaxed)",
 
     currencyUSD: "USD ($)",
     currencyEUR: "EUR (€)",
     currencyKRW: "KRW (₩)",
 
-    visaStudent: "D-2 / D-4 Student Visa",
-    visaNomad: "F-1-D Workcation / Digital Nomad",
-    visaWorkingHoliday: "H-1 Working Holiday",
-    visaProfessional: "E-Series Professional Visa",
-    visaTourist: "B-2 / C-3 Short-term / Tourist",
+    visaStudent: "Student Visa (D-2 / D-4)",
+    visaNomad: "Digital Nomad (F-1-D Workcation)",
+    visaWorkingHoliday: "Working Holiday (H-1 Visa)",
+    visaProfessional: "Professional / Resident (E / F Visa)",
+    visaTourist: "Tourist / Long-stay (> 1 month)",
     
     none: "None / No spending",
-    noneDesc: "Zero expenditure on this category."
+    noneDesc: "Zero expenditure on this category.",
+
+    // Pricing Page
+    pricingTitle: "Simple, Transparent Pricing for Your Move to Korea",
+    pricingSubtitle: "From free self-guided budgeting tools to comprehensive 1-on-1 counselor accompaniment and AI cost reduction.",
+    planFreeTitle: "Free Financial Planner",
+    planFreePrice: "$0",
+    planFreeDesc: "Self-guided behavioral budgeting tool to calculate your runway and living expenses.",
+    planFreeBtn: "Use Free Calculator",
+    planProTitle: "Seoul Relocation & Optimization Pack",
+    planProPrice: "$229",
+    planProBadge: "Most Popular",
+    planProDesc: "45-min 1-on-1 expert consultation, AI local cost optimizations & 30-day settling assistance.",
+    planProBtn: "Book Consultation - $229",
+    planVipTitle: "VIP Settling & Housing Pack",
+    planVipPrice: "$549",
+    planVipBadge: "Complete Concierge",
+    planVipDesc: "Full hands-on relocation: lease contract review, housing video tours, ARC assistance & 90-day VIP hotline.",
+    planVipBtn: "Book VIP Concierge - $549",
+    faqTitle: "Frequently Asked Questions",
+    faqQ1: "When and how do I pay for the consultation?",
+    faqA1: "No immediate payment is required when booking your calendar slot. After selecting a convenient time, our team will confirm your session and securely collect the payment prior to the call.",
+    faqQ2: "How does the Relocation Pack save me money?",
+    faqA2: "Our Seoul relocation counselors review direct Korean rental channels to bypass localized expat markups (saving an avg. ₩350k/month on rent), guide you through K-Pass transit rebates, and configure discount MVNO SIM cards.",
+    faqQ3: "Which visa types does the consultation support?",
+    faqA3: "We assist all major visas: D-2/D-4 Students, H-1 Working Holiday, F-1-D Digital Nomads, E/F-Series Professionals, and Tourist/Visitors staying over 1 month."
   },
   fr: {
     // App header & layout
     logo: "KCalc",
     partner: "Votre Partenaire d'Entrée en Corée",
+    navCalculator: "Calculateur",
+    navDistricts: "Quartiers Séoul",
+    navVisas: "Visas & Règles",
+    navRelocation: "Pack Installation",
+    navData: "Données Marché",
+    bookConsultationBtn: "Consultation Relocalisation",
     // Homepage
     journeyTitle: "Votre voyage en Corée commence par un plan",
     heroDescription: "KCalc est le planificateur financier essentiel basé sur le comportement des expatriés, étudiants et nomades digitaux s'installant en Corée du Sud. Calculez vos coûts, gérez votre budget et optimisez votre séjour.",
     feature1Title: "Données du Marché Local",
-    feature1Desc: "Estimations en temps réel du loyer, de la nourriture et des services publics dans les grandes villes coréennes.",
+    feature1Desc: "Estimations en temps réel des loyers, de l'alimentation et des charges dans les grandes villes coréennes.",
     feature2Title: "Multiplicateurs Intelligents",
     feature2Desc: "Ajustements budgétaires automatiques pour votre style de vie, ville et durée de séjour.",
     feature3Title: "Indicateur de Risque",
-    feature3Desc: "Sachez exactement combien de temps dureront vos économies grâce à nos calculs de taux de combustion.",
+    feature3Desc: "Sachez exactement combien de temps dureront vos économies grâce au calcul précis de vos dépenses mensuelles.",
     
     // Steps
     stepPresets: "Préréglage & Durée",
     stepHousing: "Logement",
-    stepFood: "Nourriture & Café",
+    stepFood: "Alimentation & Boissons",
     stepTransport: "Transport",
     stepHealth: "Santé & Soins",
-    stepLifestyle: "Style de vie & Social",
+    stepLifestyle: "Style de vie & Sorties",
     stepSummary: "Résumé du Budget",
 
     // Step 1: Config
@@ -149,14 +186,14 @@ export const translations = {
     // Step 2: Housing
     housingTypeLabel: "Sélectionnez le type de logement",
     housingLocationLabel: "Sélectionnez la zone géographique",
-    housingUsageLabel: "Niveau de consommation des services publics",
+    housingUsageLabel: "Niveau de consommation d'énergie & charges",
 
     // Step 3: Food
-    cookingLabel: "Fréquence de cuisine à la maison",
+    cookingLabel: "Courses & Cuisine à la maison",
     eatingOutLabel: "Repas au restaurant",
     deliveryLabel: "Livraison de repas (Baemin/Coupang)",
     convenienceLabel: "Repas en supérette (Convenience Store)",
-    cafeLabel: "Café & Collations",
+    cafeLabel: "Cafés, Thés, Bubble Tea & Boissons",
 
     // Step 4: Transport
     transportLabel: "Moyen de transport principal",
@@ -166,8 +203,8 @@ export const translations = {
     clinicLabel: "Soins médicaux / Cliniques",
 
     // Step 6: Lifestyle & Social
-    socialLabel: "Sorties & Vie nocturne",
-    shoppingLabel: "Shopping (Mode, Biens)",
+    socialLabel: "Sorties & Soirées",
+    shoppingLabel: "Shopping (Mode, Achats du quotidien)",
 
     // Step 7: Summary
     potentialSavings: "Vos Économies Potentielles",
@@ -195,42 +232,67 @@ export const translations = {
     nextBtn: "Suivant",
     diagnosticBtn: "📊 Rapport de Diagnostic des Coûts",
 
-    // Labels & Options (Translations for dynamic values from constants)
+    // Labels & Options
     goshiwon: "Goshiwon (고시원)",
-    goshiwonDesc: "Micro-chambre, douche/buanderie partagées, pas de cuisine privée.",
-    shared: "Appartement Partagé",
-    sharedDesc: "Chambre privée dans un appartement partagé, accès cuisine.",
+    goshiwonDesc: "Très petite chambre privée (3 à 6 m²), salle de bain & buanderie partagées. Sans engagement de bail, caution minimale.",
+    shared: "Appartement Partagé (Sharehouse)",
+    sharedDesc: "Chambre privée meublée dans une colocation avec cuisine, salon et salle de bain partagés.",
     studio: "One-room Studio (원룸)",
-    studioDesc: "Studio privé standard avec cuisine.",
+    studioDesc: "Studio individuel indépendant avec kitchenette et salle de bain privées. Logement standard en Corée.",
     officetel: "Officetel (오피스텔)",
-    officetelDesc: "Studio premium avec hauteur sous plafond élevée, cuisine moderne.",
+    officetelDesc: "Studio moderne en immeuble sécurisé avec gardien 24/7, ascenseur et électroménager encastré.",
     apartment: "Appartement (아파트)",
-    apartmentDesc: "Appartement multi-pièces de standing avec grande cuisine équipée.",
+    apartmentDesc: "Appartement familial spacieux multi-pièces avec grande cuisine. Requiert une caution très importante.",
     guesthouse: "Maison d'Hôtes / Auberge",
-    guesthouseDesc: "Chambre en auberge de jeunesse ou maison d'hôtes. Entièrement meublé, tarifs flexibles, zéro caution.",
-    friend: "Gratuit / Logé chez un ami",
-    friendDesc: "Hébergé chez de la famille, des amis ou logement de fonction.",
+    guesthouseDesc: "Chambre privée ou dortoir pour court/moyen séjour. Meublé, charges et Wi-Fi inclus, zéro caution.",
+    friend: "Hébergement chez un proche / Ami",
+    friendDesc: "Hébergé chez des proches ou amis sans loyer. Possibilité de choisir si les charges sont gratuites ou partagées.",
 
     outside_seoul: "Hors de Séoul (Busan, Incheon, Daegu)",
     outskirts: "Périphérie de Séoul (Banlieue d'Incheon, Gyeonggi, districts extérieurs)",
     central: "Centre de Séoul (Mapo, Yongsan, Gangbuk)",
     premium: "Quartiers Premium (Gangnam, Seocho, Songpa)",
     
-    survival: "Mode Survie (Minimaliste / Économique)",
-    moderate: "Mode Modéré (Équilibré / Typique)",
-    comfortable: "Mode Confortable (Détendu / Haut de gamme)",
+    survival: "Mode Économe (Budget serré)",
+    moderate: "Mode Standard (Équilibré)",
+    comfortable: "Mode Confortable (Détendu)",
 
     currencyUSD: "USD ($)",
     currencyEUR: "EUR (€)",
     currencyKRW: "KRW (₩)",
 
-    visaStudent: "Visa Étudiant D-2 / D-4",
-    visaNomad: "Nomade Digital / Workcation F-1-D",
-    visaWorkingHoliday: "Visa Vacances-Travail H-1",
-    visaProfessional: "Visa Professionnel E-Series",
-    visaTourist: "Court séjour / Touriste B-2 / C-3",
+    visaStudent: "Visa Étudiant (D-2 Université / D-4 Langue)",
+    visaNomad: "Nomade Digital (F-1-D Workcation)",
+    visaWorkingHoliday: "Visa Vacances-Travail (H-1 / WHV)",
+    visaProfessional: "Visa Professionnel (E-Series / Résident F)",
+    visaTourist: "Tourisme Long Séjour / Visiteur (> 1 mois)",
     
     none: "Aucun / Pas de dépense",
-    noneDesc: "Zéro dépense pour cette catégorie."
+    noneDesc: "Zéro dépense pour cette catégorie.",
+
+    // Pricing Page
+    pricingTitle: "Des Tarifs Simples et Transparents pour Votre Installation en Corée",
+    pricingSubtitle: "Du calculateur gratuit en libre-service à l'accompagnement personnalisé 1-on-1 par un expert local et l'optimisation des coûts par IA.",
+    planFreeTitle: "Calculateur Financier Gratuit",
+    planFreePrice: "0 €",
+    planFreeDesc: "Outil complet de simulation financière comportementale pour calculer votre réserve et vos dépenses.",
+    planFreeBtn: "Accéder au Calculateur",
+    planProTitle: "Pack Installation & Optimisation Séoul",
+    planProPrice: "229 $",
+    planProBadge: "Le Plus Populaire",
+    planProDesc: "Consultation 1-on-1 de 45 min avec un expert, optimisations des coûts par IA & assistance d'installation 30 jours.",
+    planProBtn: "Réserver la Consultation - 229$",
+    planVipTitle: "Pack VIP Clé en Main & Logement",
+    planVipPrice: "549 $",
+    planVipBadge: "Conciergerie Complète",
+    planVipDesc: "Accompagnement intégral : relecture de bail coréen, visites vidéo de logements, aide ARC & conciergerie VIP 90 jours.",
+    planVipBtn: "Réserver l'Offre VIP - 549$",
+    faqTitle: "Questions Fréquemment Posées",
+    faqQ1: "Quand et comment s'effectue le paiement ?",
+    faqA1: "Aucun paiement immédiat n'est débité lors du choix de votre créneau sur le calendrier. Notre équipe valide votre rendez-vous et vous transmet les modalités de règlement sécurisé avant la consultation.",
+    faqQ2: "Comment le Pack Installation me fait-il économiser ?",
+    faqA2: "Nos conseillers vous orientent vers des canaux de location directs évitant les surcoûts d'agences pour expatriés (économie moy. de 350 000 ₩/mois), configurent vos remboursements de transports K-Pass et forfaits SIM MVNO.",
+    faqQ3: "Quels types de visas sont pris en charge ?",
+    faqA3: "Nous accompagnons tous les profils : Visa Étudiant (D-2/D-4), Vacances-Travail (H-1 / WHV), Nomade Digital (F-1-D), Salariés & Résidents (E/F) et Touristes long séjour (> 1 mois)."
   }
 } as const;

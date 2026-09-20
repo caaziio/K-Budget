@@ -1,69 +1,45 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import BudgetCalculator from '@/components/BudgetCalculator'
+import Navbar from '@/components/Navbar'
 import { useBudgetStore } from '@/store/useBudgetStore'
 import { translations } from '@/lib/translations'
 import styles from './page.module.css'
+import KCalcLogo from '@/components/KCalcLogo'
+import { 
+  Sparkles, 
+  Database, 
+  SlidersHorizontal, 
+  ShieldCheck, 
+  Heart
+} from 'lucide-react'
 
 export default function Home() {
   const store = useBudgetStore()
   const t = translations[store.language]
 
   return (
-    <div className={styles.container} style={{ position: 'relative' }}>
-      {/* Language Switcher */}
-      <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '0.375rem', zIndex: 50 }}>
-        <button 
-          onClick={() => store.setVal('language', 'en')} 
-          style={{ 
-            padding: '0.375rem 0.75rem', 
-            borderRadius: '0.5rem', 
-            fontSize: '0.75rem', 
-            fontWeight: 800, 
-            border: store.language === 'en' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)', 
-            background: store.language === 'en' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(15, 23, 42, 0.6)',
-            color: store.language === 'en' ? '#60a5fa' : '#94a3b8',
-            cursor: 'pointer',
-            transition: 'all 0.2s',
-            backdropFilter: 'blur(8px)'
-          }}
-        >
-          EN
-        </button>
-        <button 
-          onClick={() => store.setVal('language', 'fr')} 
-          style={{ 
-            padding: '0.375rem 0.75rem', 
-            borderRadius: '0.5rem', 
-            fontSize: '0.75rem', 
-            fontWeight: 800, 
-            border: store.language === 'fr' ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.15)', 
-            background: store.language === 'fr' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(15, 23, 42, 0.6)',
-            color: store.language === 'fr' ? '#60a5fa' : '#94a3b8',
-            cursor: 'pointer',
-            transition: 'all 0.2s',
-            backdropFilter: 'blur(8px)'
-          }}
-        >
-          FR
-        </button>
-      </div>
+    <div className={styles.container}>
+      {/* Unified Global Navigation Bar */}
+      <Navbar />
 
+      {/* Hero Section */}
       <header className={styles.hero}>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className={styles.heroContent}
         >
+          <div className={styles.badge}>
+            <Sparkles size={14} />
+            <span>{store.language === 'fr' ? 'Optimisé pour Nomades, Étudiants & Expats' : 'Calibrated for Nomads, Students & Expats'}</span>
+          </div>
           <h1 className={styles.title}>
-            {store.language === 'fr' ? (
-              <>Votre Voyage en <span className={styles.highlight}>Corée</span> Commence par un Plan</>
-            ) : (
-              <>Your Journey to <span className={styles.highlight}>Korea</span> Starts with a Plan</>
-            )}
+            {t.journeyTitle}
           </h1>
           <p className={styles.subtitle}>
             {t.heroDescription}
@@ -71,31 +47,70 @@ export default function Home() {
         </motion.div>
       </header>
 
-      <motion.section 
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className={styles.calculatorSection}
-      >
+      {/* Calculator Core */}
+      <main id="calculator" className={styles.main}>
         <BudgetCalculator />
-      </motion.section>
+      </main>
 
-      <section className={styles.aboutSection}>
+      {/* Value Proposition / Methodology Section */}
+      <section id="features" className={styles.aboutSection}>
+        <div className={styles.aboutHeader}>
+          <h2>
+            {store.language === 'fr'
+              ? 'Pourquoi KCalc est plus précis qu\'une simple moyenne'
+              : 'Why KCalc is Different from Generic Cost-of-Living Estimators'
+            }
+          </h2>
+          <p>
+            {store.language === 'fr'
+              ? 'Des estimations réelles et prédictives adaptées aux visas, quartiers et modes de vie réels.'
+              : 'Real, predictive budgeting calibrated for expat visas, neighborhoods, and actual spending habits.'
+            }
+          </p>
+        </div>
         <div className={styles.aboutGrid}>
-          <div className={styles.feature}>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIconBox}>
+              <Database size={22} />
+            </div>
             <h3>{t.feature1Title}</h3>
             <p>{t.feature1Desc}</p>
           </div>
-          <div className={styles.feature}>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIconBox}>
+              <SlidersHorizontal size={22} />
+            </div>
             <h3>{t.feature2Title}</h3>
             <p>{t.feature2Desc}</p>
           </div>
-           <div className={styles.feature}>
+           <div className={styles.featureCard}>
+            <div className={styles.featureIconBox}>
+              <ShieldCheck size={22} />
+            </div>
             <h3>{t.feature3Title}</h3>
             <p>{t.feature3Desc}</p>
           </div>
         </div>
       </section>
+
+      {/* Target Anchor for Relocation Pack */}
+      <div id="relocation" />
+
+      <footer className={styles.footer}>
+        <div style={{ marginBottom: '0.75rem' }}>
+          <KCalcLogo size={30} showText={true} />
+        </div>
+        <div className={styles.footerLinks}>
+          <span>KCalc Korea</span>
+          <span>•</span>
+          <span>Seoul Relocation Engine</span>
+          <span>•</span>
+          <span>Expat Budget Simulator</span>
+        </div>
+        <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          Crafted for digital nomads, students & expats moving to South Korea <Heart size={12} color="#ef4444" fill="#ef4444" />
+        </p>
+      </footer>
     </div>
   )
 }

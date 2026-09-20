@@ -12,39 +12,39 @@ export const HOUSING_DATA = {
       comfortable: 450000,
       deposit: 100000,
       label: 'Goshiwon (고시원)',
-      desc: 'Micro-room, shared shower/laundry, no private kitchen.'
+      desc: 'Very small compact private room (3-6m²) with bed and desk. Shared bathroom, kitchen, and laundry. Highly flexible monthly stay, zero long-term lease commitment, and minimal deposit.'
     },
     shared: {
-      survival: 650000, // Fallback if selected
+      survival: 650000,
       moderate: 650000,
       comfortable: 850000,
       deposit: 1000000,
-      label: 'Shared Apartment',
-      desc: 'Private bedroom in a shared flat, kitchen access.'
+      label: 'Shared Apartment (Sharehouse)',
+      desc: 'Private furnished bedroom in a shared flat with common kitchen, living area, and bathroom. Great for community living with medium-to-low deposit.'
     },
     studio: {
-      survival: 900000, // Fallback if selected
+      survival: 900000,
       moderate: 900000,
       comfortable: 1200000,
       deposit: 5000000,
       label: 'One-room Studio (원룸)',
-      desc: 'Standard private studio flat with kitchen.'
+      desc: 'Independent private studio with self-contained kitchenette and private bathroom. Korea\'s standard expat housing; typically requires a 1-year contract and a ₩5M-₩10M deposit.'
     },
     officetel: {
-      survival: 1200000, // Fallback if selected
+      survival: 1200000,
       moderate: 1200000,
       comfortable: 1500000,
       deposit: 10000000,
       label: 'Officetel (오피스텔)',
-      desc: 'Premium high-ceiling studio, modern kitchen facilities.'
+      desc: 'Modern studio in a commercial high-rise with elevator, 24/7 security, and built-in appliances. Requires high deposit (₩10M+) and monthly building management fees.'
     },
     apartment: {
-      survival: 1800000, // Fallback if selected
+      survival: 1800000,
       moderate: 1800000,
       comfortable: 2500000,
       deposit: 20000000,
       label: 'Apartment (아파트)',
-      desc: 'Luxury multi-room flat with large full-size kitchen.'
+      desc: 'Full-sized multi-room residential apartment complex with large kitchen and living room. Best for families and long stays; requires the highest key-money deposit.'
     },
     guesthouse: {
       survival: 400000,
@@ -52,7 +52,7 @@ export const HOUSING_DATA = {
       comfortable: 1100000,
       deposit: 0,
       label: 'Guest House / Hostel',
-      desc: 'Short-stay hostel or guest house room. Fully furnished, flexible daily/monthly rates, zero deposit.'
+      desc: 'Furnished short-stay private room or dorm. Includes all utilities and Wi-Fi, flexible daily/monthly booking, with zero deposit required.'
     },
     friend: {
       survival: 0,
@@ -60,7 +60,7 @@ export const HOUSING_DATA = {
       comfortable: 0,
       deposit: 0,
       label: 'Staying with Friend / Family',
-      desc: 'Living at a friend or family member\'s place. No rental contract or security deposit required.'
+      desc: 'Living with friends or family without rent or rental contract. You can choose below whether you pay ₩0 (all bills covered by host) or share household utilities.'
     }
   },
   locations: {
@@ -70,39 +70,42 @@ export const HOUSING_DATA = {
     premium: { mult: 1.25, label: 'Premium (Gangnam/Seocho)' }
   },
   usage_styles: {
-    minimal: { util_add: 40000, label: 'Eco-conscious', desc: 'Minimal heating/AC.' },
-    standard: { util_add: 80000, label: 'Standard', desc: 'Comfortable daily use.' },
-    premium: { util_add: 160000, label: 'High Usage', desc: 'Frequent heating/AC, heavy appliances.' }
+    minimal: { util_add: 40000, label: 'Eco-conscious', desc: 'Minimal heating/AC, thrifty electricity usage.' },
+    standard: { util_add: 80000, label: 'Standard', desc: 'Comfortable daily AC in summer and floor heating (ondol) in winter.' },
+    premium: { util_add: 160000, label: 'High Usage', desc: 'Continuous heating/AC, multiple heavy appliances, long showers.' }
   }
 };
 
 export const FOOD_DATA = {
   cooking: {
-    survival: { add: 120000, label: 'Survival Groceries', desc: 'Strict home cooking (KRW 4k per meal, 30 days).' },
-    moderate: { add: 120000, label: 'Moderate Groceries', desc: 'Standard home cooking (KRW 4k per meal, 30 days).' },
-    comfortable: { add: 80000, label: 'Minimal Groceries', desc: 'Basic grocery shopping (KRW 4k per meal, 20 days).' },
-    none: { add: 0, label: 'Almost No Cooking', desc: '100% eating out / delivery.' }
+    none: { add: 0, label: 'No Home Cooking (100% Out)', desc: 'Zero grocery shopping; rely entirely on dining out and delivery.' },
+    survival: { add: 120000, label: 'Basic Grocery Essentials', desc: 'Rice, eggs, tofu, instant noodles, budget mart staples (~₩4,000/day).' },
+    moderate: { add: 240000, label: 'Standard Varied Groceries', desc: 'Fresh vegetables, meat, dairy, fruits, regular home cooking (~₩8,000/day).' },
+    comfortable: { add: 420000, label: 'Gourmet & Premium Groceries', desc: 'Imported products, premium beef, specialty organic ingredients (~₩14,000/day).' }
   },
   restaurant: {
-    survival: { add: 540000, label: 'Budget Eating Out', desc: 'Simple meals (KRW 9k × 2 × 30 days).' },
-    moderate: { add: 330000, label: 'Balanced Dining', desc: 'Standard restaurant meals (KRW 11k × 1 × 30 days).' },
-    comfortable: { add: 750000, label: 'Premium Dining', desc: 'High-end restaurants (KRW 12.5k × 2 × 30 days).' },
-    none: { add: 0, label: 'Rarely Dine Out', desc: 'Home-cooked or delivery focus.' }
+    none: { add: 0, label: 'Rarely Dine Out', desc: 'Cook at home, university cafeteria, or convenience store meals.' },
+    survival: { add: 120000, label: 'Occasional Budget Dining (2-3x/week)', desc: 'Affordable Korean bunsik, kimbap, street food, student cafeterias (~₩10,000 × 12 meals).' },
+    moderate: { add: 330000, label: 'Daily Standard Dining (1 meal/day)', desc: '1 standard lunch/dinner at local neighborhood eateries (~₩11,000 × 30 meals).' },
+    comfortable: { add: 750000, label: 'Frequent & Premium Dining (2 meals/day + BBQ)', desc: 'Two restaurant meals daily, weekend Korean BBQ (samgyeopsal), trendy hot spots (~₩25,000/day).' }
   },
   delivery: {
-    survival: { add: 0, label: 'No Delivery', desc: 'Avoid food delivery apps entirely.' },
-    moderate: { add: 130000, label: 'Moderate Delivery', desc: 'Occasional deliveries (KRW 13k × 10 orders).' },
-    comfortable: { add: 300000, label: 'Heavy Delivery', desc: 'Frequent app delivery orders (KRW 15k × 20 orders).' }
+    none: { add: 0, label: 'No Delivery Spending', desc: 'Zero food delivery app orders.' },
+    survival: { add: 0, label: 'No Delivery Spending', desc: 'Zero food delivery app orders.' },
+    moderate: { add: 130000, label: 'Occasional Delivery (1-2x/week)', desc: 'Weekend comfort food, late-night fried chicken or pizza (~₩18,000 × 7 orders).' },
+    comfortable: { add: 300000, label: 'Frequent Delivery (3-4x/week)', desc: 'Regular Baemin/Coupang Eats delivery meals (~₩22,000 × 14 orders).' }
   },
   convenience: {
-    survival: { add: 40000, label: 'Basic CVS Spending', desc: 'Snacks, instant food (KRW 40k/mo).' },
-    moderate: { add: 80000, label: 'Regular CVS Spending', desc: 'CVS meals, quick runs (KRW 80k/mo).' },
-    comfortable: { add: 100000, label: 'Comfort CVS Spending', desc: 'Frequent CVS trips (KRW 100k/mo).' }
+    none: { add: 0, label: 'No Convenience Store Spend', desc: 'Zero convenience store spending.' },
+    survival: { add: 40000, label: 'Basic Emergency Snacks', desc: 'Bottled water, ramen, quick convenience runs (~₩1,300/day).' },
+    moderate: { add: 80000, label: 'Regular Convenience Meals', desc: 'Convenience lunch boxes (Dosirak), triangle kimbap, drinks (~₩2,700/day).' },
+    comfortable: { add: 140000, label: 'Frequent CVS Lifestyle', desc: 'Daily ready-to-eat meals, premium ice cream, late-night convenience visits (~₩4,700/day).' }
   },
   cafe_snacks: {
-    survival: { add: 0, label: 'No Cafe Spend', desc: 'Stick to free/instant options.' },
-    moderate: { add: 60000, label: 'Casual Cafe Visits', desc: 'Occasional cafe outings (KRW 60k/mo).' },
-    comfortable: { add: 150000, label: 'Premium Cafe / Snacks', desc: 'Daily specialty coffee & dessert (KRW 150k/mo).' }
+    none: { add: 0, label: 'No Cafe & Drink Spend', desc: 'Free water or instant Maxim coffee at home / office.' },
+    survival: { add: 0, label: 'No Cafe & Drink Spend', desc: 'Free water or instant Maxim coffee at home / office.' },
+    moderate: { add: 60000, label: 'Budget Drinks & Coffee (Mega / Compose)', desc: 'Iced tea, Americano, Mega Coffee 3-4x/week (~₩2,000-₩3,000/drink).' },
+    comfortable: { add: 150000, label: 'Specialty Cafes, Bubble Tea & Desserts', desc: 'Starbucks, Gong Cha bubble tea, matcha, aesthetic cafes & pastries (~₩5,000/day).' }
   }
 };
 
@@ -113,28 +116,28 @@ export const TRANSPORT_DATA = {
       moderate: 100000,
       comfortable: 120000,
       label: 'Metro & Bus Only',
-      desc: 'Base commute with public transport.'
+      desc: 'Base commute with public transport (Subway + Bus with transfer discount).'
     },
     mixed: {
-      survival: 120000, // Forced base if selected
+      survival: 120000,
       moderate: 180000,
       comfortable: 300000,
       label: 'Mixed Transport',
-      desc: 'Metro + occasional taxi rides.'
+      desc: 'Regular public transit + occasional KakaoTaxi rides.'
     },
     taxi: {
-      survival: 200000, // Forced base if selected
+      survival: 200000,
       moderate: 350000,
       comfortable: 500000,
       label: 'Taxi Heavy',
-      desc: 'Frequent private taxi rides, active social life.'
+      desc: 'Frequent private taxi rides and convenient late-night transit.'
     },
     car: {
-      survival: 500000, // Forced base if selected
+      survival: 500000,
       moderate: 650000,
       comfortable: 800000,
       label: 'Car Owner',
-      desc: 'Gas, insurance, toll, maintenance (Premium).'
+      desc: 'Gas, insurance, toll, parking, maintenance (Premium).'
     }
   }
 };
@@ -222,17 +225,45 @@ export const HEALTH_DATA = {
   }
 };
 
+export const INSURANCE_BY_VISA = {
+  tourist: {
+    survival: 45000,
+    moderate: 95000,
+    comfortable: 180000
+  },
+  student: {
+    survival: 75000,
+    moderate: 110000,
+    comfortable: 180000
+  },
+  working_holiday: {
+    survival: 60000,
+    moderate: 120000,
+    comfortable: 190000
+  },
+  nomad: {
+    survival: 90000,
+    moderate: 160000,
+    comfortable: 260000
+  },
+  professional: {
+    survival: 100000,
+    moderate: 150000,
+    comfortable: 250000
+  }
+};
+
 export const VISA_DATA = {
-  nomad: { add: 0, label: 'Digital Nomad / F-Visa' },
+  nomad: { add: 0, label: 'Digital Nomad (F-1-D Workcation)' },
   student: { add: 30000, label: 'Student (D-2 / D-4)' },
-  professional: { add: 20000, label: 'Professional / E-Visa' },
-  working_holiday: { add: 50000, label: 'Working Holiday' },
-  tourist: { add: 100000, label: 'Tourist / Short-stay' }
+  professional: { add: 20000, label: 'Professional (E-Series / F-Visa)' },
+  working_holiday: { add: 50000, label: 'Working Holiday (H-1 Visa)' },
+  tourist: { add: 100000, label: 'Tourist / Long-stay (> 1 month)' }
 };
 
 export const LIFESTYLE_PLAN_DATA = {
-  survival: { mult: 1.0, label: 'Survival Mode', desc: 'Focus on minimal living & strict saving.' },
-  moderate: { mult: 1.0, label: 'Moderate Mode', desc: 'Standard balanced lifestyle in a one-room.' },
+  survival: { mult: 1.0, label: 'Essential Budget Mode', desc: 'Focus on minimal living & strict saving.' },
+  moderate: { mult: 1.0, label: 'Standard Mode', desc: 'Standard balanced lifestyle in a one-room.' },
   comfortable: { mult: 1.0, label: 'Comfortable Mode', desc: 'Premium lifestyle with high convenience.' }
 };
 
@@ -242,8 +273,8 @@ export const SETUP_DATA = {
   installation_matrix: {
     survival: {
       amount: 150000,
-      label: 'Survival Setup (Thrift/Daiso)',
-      desc: 'Floor sleeping pad, basic Daiso kitchenware, no furniture.'
+      label: 'Essential Setup (Thrift/Daiso)',
+      desc: 'Floor sleeping pad, basic Daiso kitchenware, minimal setup.'
     },
     moderate: {
       amount: 600000,
