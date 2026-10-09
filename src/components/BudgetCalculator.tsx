@@ -501,6 +501,7 @@ export default function BudgetCalculator() {
   const stepperRef = useRef<HTMLDivElement>(null)
   const hasChangedStepRef = useRef(false)
   const store = useBudgetStore()
+  const [durationInput, setDurationInput] = useState(String(store.duration))
   const t = translations[store.language]
 
   const gt = (txt: string) => getTranslation(txt, store.language)
@@ -612,6 +613,34 @@ export default function BudgetCalculator() {
     }
   }, [currentStep])
 
+  useEffect(() => {
+    setDurationInput(String(store.duration))
+  }, [store.duration])
+
+  const handleDurationChange = (value: string) => {
+    if (value === '') {
+      setDurationInput('')
+      return
+    }
+
+    const parsedDuration = Number.parseInt(value, 10)
+    if (Number.isNaN(parsedDuration)) return
+
+    const duration = Math.min(60, Math.max(1, parsedDuration))
+    setDurationInput(String(duration))
+    store.setVal('duration', duration)
+  }
+
+  const commitDuration = () => {
+    const parsedDuration = Number.parseInt(durationInput, 10)
+    const duration = Number.isNaN(parsedDuration)
+      ? 1
+      : Math.min(60, Math.max(1, parsedDuration))
+
+    setDurationInput(String(duration))
+    store.setVal('duration', duration)
+  }
+
   const goToStep = (step: number) => setCurrentStep(Math.max(1, Math.min(step, STEPS.length)))
   const handleNext = () => goToStep(currentStep + 1)
   const handleBack = () => goToStep(currentStep - 1)
@@ -693,8 +722,10 @@ export default function BudgetCalculator() {
                     type="number" 
                     min="1" 
                     max="60" 
-                    value={store.duration} 
-                    onChange={(e) => store.setVal('duration', Math.max(1, parseInt(e.target.value) || 1))} 
+                    inputMode="numeric"
+                    value={durationInput}
+                    onChange={(e) => handleDurationChange(e.target.value)}
+                    onBlur={commitDuration}
                   />
                 </div>
                 
